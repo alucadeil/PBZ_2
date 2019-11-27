@@ -8,28 +8,31 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerRegistration">
+<AnchorPane prefHeight="400.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerRegistration">
    <children>
+      <TextField fx:id="task" layoutX="298.0" layoutY="289.0" prefHeight="26.0" prefWidth="150.0" promptText="Задача" />
       <TableView fx:id="table" layoutX="64.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <columns>
-          <TableColumn fx:id="col1" prefWidth="52.0" text="id" />
-          <TableColumn fx:id="col2" prefWidth="60.800048828125" text="Номер" />
+            <TableColumn fx:id="col1" prefWidth="52.0" text="id" />
+            <TableColumn fx:id="col2" prefWidth="60.800048828125" text="Номер" />
             <TableColumn fx:id="col3" prefWidth="84.0" text="Дата создания" />
-            <TableColumn fx:id="col4" prefWidth="108.0" text="Дата регистрации" />
-            <TableColumn fx:id="col5" prefWidth="72.79998779296875" text="Код" />
-            <TableColumn fx:id="col6" prefWidth="59.199951171875" text="Тип" />
-            <TableColumn fx:id="col7" prefWidth="92.800048828125" text="Название" />
-            <TableColumn fx:id="col8" prefWidth="108.79998779296875" text="Исполнитель" />
+            <TableColumn fx:id="col4" prefWidth="59.99998474121094" text="Дата регистрации" />
+            <TableColumn fx:id="col5" prefWidth="61.60003662109375" text="Код" />
+            <TableColumn fx:id="col6" prefWidth="64.79998779296875" text="Тип" />
+            <TableColumn fx:id="col7" prefWidth="99.20001220703125" text="Название" />
+            <TableColumn fx:id="col8" prefWidth="71.20001220703125" text="Исполнитель" />
+            <TableColumn fx:id="col9" prefWidth="77.60003662109375" text="Срок" />
+            <TableColumn fx:id="col10" prefWidth="124.7999267578125" text="Задача" />
         </columns>
       </TableView>
       <TextField fx:id="number" layoutX="20.0" layoutY="288.0" prefHeight="26.0" prefWidth="107.0" promptText="Номер" />
       <DatePicker fx:id="create_date" layoutX="133.0" layoutY="289.0" prefHeight="26.0" prefWidth="134.0" />
       <DatePicker fx:id="registration_date" layoutX="133.0" layoutY="325.0" prefHeight="26.0" prefWidth="134.0" />
       <TextField fx:id="code" layoutX="20.0" layoutY="325.0" prefHeight="26.0" prefWidth="107.0" promptText="Код" />
-      <ChoiceBox fx:id="executor" layoutX="300.0" layoutY="325.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="executor" layoutX="298.0" layoutY="357.0" prefWidth="150.0" />
       <Button layoutX="477.0" layoutY="289.0" mnemonicParsing="false" onAction="#save" text="Сохранить" />
-      <ChoiceBox fx:id="type" layoutX="300.0" layoutY="288.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="type" layoutX="298.0" layoutY="320.0" prefWidth="150.0" />
       <TextField fx:id="name" layoutX="20.0" layoutY="359.0" prefHeight="26.0" prefWidth="107.0" promptText="Название" />
+      <DatePicker fx:id="end_date" layoutX="133.0" layoutY="359.0" prefHeight="26.0" prefWidth="134.0" />
    </children>
 </AnchorPane>

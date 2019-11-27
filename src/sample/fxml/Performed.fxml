@@ -13,77 +13,29 @@
 <children>
       <TabPane prefHeight="400.0" prefWidth="634.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Исполнители">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                         <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
-                             <columns>
-                                 <TableColumn fx:id="col1" prefWidth="110.4000301361084" text="id" />
-                                 <TableColumn fx:id="col2" minWidth="0.0" prefWidth="104.79998779296875" text="ФИО" />
-                                 <TableColumn fx:id="col3" prefWidth="119.99998474121094" text="Должность" />
-                                 <TableColumn fx:id="col4" prefWidth="137.5999755859375" text="Телефон" />
-                                 <TableColumn fx:id="col5" prefWidth="139.2000732421875" text="email" />
-                             </columns>
-                         </TableView>
-                         <ChoiceBox fx:id="position" layoutX="289.0" layoutY="239.0" prefWidth="150.0" />
-                         <TextField fx:id="email_executor" layoutX="202.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="email" />
-                         <TextField fx:id="telephone_executor" layoutX="14.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="Телефон" AnchorPane.leftAnchor="10.0" />
-                         <Button layoutX="520.0" layoutY="313.0" mnemonicParsing="false" onAction="#saveExecutor" text="Сохранить" />
-                         <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#deleteExecutor" text="Удалить" />
-                         <Button layoutX="95.0" layoutY="240.0" mnemonicParsing="false" onAction="#searchExecutor" text="Найти" />
-                         <TextField fx:id="name_executor" layoutX="14.0" layoutY="276.0" prefHeight="26.0" prefWidth="246.0" promptText="ФИО" AnchorPane.leftAnchor="10.0" />
-                         <TextField fx:id="id_executor" layoutX="14.0" layoutY="239.0" prefHeight="26.0" prefWidth="51.0" promptText="ID" AnchorPane.leftAnchor="10.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
             <Tab text="Авторы">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                        <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                            <columns>
-                              <TableColumn fx:id="col6" prefWidth="110.4000301361084" text="id" />
-                              <TableColumn fx:id="col7" minWidth="0.0" prefWidth="104.79998779296875" text="ФИО" />
-                              <TableColumn fx:id="col8" prefWidth="119.99998474121094" text="Должность" />
-                              <TableColumn fx:id="col9" prefWidth="137.5999755859375" text="Телефон" />
-                              <TableColumn fx:id="col10" prefWidth="139.2000732421875" text="email" />
+                              <TableColumn fx:id="col1" prefWidth="110.4000301361084" text="id" />
+                              <TableColumn fx:id="col2" minWidth="0.0" prefWidth="104.79998779296875" text="ФИО" />
+                              <TableColumn fx:id="col3" prefWidth="119.99998474121094" text="Должность" />
+                              <TableColumn fx:id="col4" prefWidth="86.4000244140625" text="Телефон" />
+                              <TableColumn fx:id="col5" prefWidth="110.39987182617188" text="email" />
+                              <TableColumn fx:id="col6" prefWidth="110.39987182617188" />
                            </columns>
                         </TableView>
-                        <ChoiceBox fx:id="position1" layoutX="289.0" layoutY="239.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="position" layoutX="289.0" layoutY="239.0" prefWidth="150.0" />
                         <TextField fx:id="email_author" layoutX="202.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="email" />
                         <TextField fx:id="telephone_author" layoutX="14.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="Телефон" AnchorPane.leftAnchor="10.0" />
-                        <Button layoutX="520.0" layoutY="313.0" mnemonicParsing="false" onAction="#saveAuthor" text="Сохранить" />
-                        <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#deleteAuthor" text="Удалить" />
-                        <Button layoutX="95.0" layoutY="240.0" mnemonicParsing="false" onAction="#searchAuthor" text="Найти" />
+                        <Button layoutX="520.0" layoutY="313.0" mnemonicParsing="false" onAction="#save" text="Сохранить" />
+                        <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#delete" text="Удалить" />
+                        <Button layoutX="95.0" layoutY="240.0" mnemonicParsing="false" onAction="#search" text="Найти" />
                         <TextField fx:id="name_author" layoutX="14.0" layoutY="276.0" prefHeight="26.0" prefWidth="246.0" promptText="ФИО" AnchorPane.leftAnchor="10.0" />
                         <TextField fx:id="id_author" layoutX="14.0" layoutY="239.0" prefHeight="26.0" prefWidth="51.0" promptText="ID" AnchorPane.leftAnchor="10.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Контроллеры">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
-                           <columns>
-                              <TableColumn fx:id="col11" prefWidth="110.4000301361084" text="id" />
-                              <TableColumn fx:id="col12" minWidth="0.0" prefWidth="104.79998779296875" text="ФИО" />
-                              <TableColumn fx:id="col13" prefWidth="119.99998474121094" text="Должность" />
-                              <TableColumn fx:id="col14" prefWidth="137.5999755859375" text="Телефон" />
-                              <TableColumn fx:id="col15" prefWidth="139.2000732421875" text="email" />
-                           </columns>
-                        </TableView>
-                        <ChoiceBox fx:id="position2" layoutX="289.0" layoutY="239.0" prefWidth="150.0" />
-                        <TextField fx:id="email_controller" layoutX="202.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="email" />
-                        <TextField fx:id="telephone_controller" layoutX="14.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="Телефон" AnchorPane.leftAnchor="10.0" />
-                        <Button layoutX="520.0" layoutY="313.0" mnemonicParsing="false" onAction="#saveСontroller" text="Сохранить" />
-                        <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#deleteСontroller" text="Удалить" />
-                        <Button layoutX="95.0" layoutY="240.0" mnemonicParsing="false" onAction="#searchСontroller" text="Найти" />
-                        <TextField fx:id="name_controller" layoutX="14.0" layoutY="276.0" prefHeight="26.0" prefWidth="246.0" promptText="ФИО" AnchorPane.leftAnchor="10.0" />
-                        <TextField fx:id="id_controller" layoutX="14.0" layoutY="239.0" prefHeight="26.0" prefWidth="51.0" promptText="ID" AnchorPane.leftAnchor="10.0" />
+                        <ChoiceBox fx:id="choice" layoutX="289.0" layoutY="276.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                </content>

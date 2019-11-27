@@ -25,10 +25,14 @@ public class ControllerWinMain {
     }
 
     public void OpenControllers(ActionEvent actionEvent) throws IOException {
-        WinControllers controllers = new WinControllers();
+        WinChek controllers = new WinChek();
     }
 
     public void OpenListDocuments(ActionEvent actionEvent) throws IOException {
         WinDocuments documents = new WinDocuments();
+    }
+
+    public void OpenChek(ActionEvent actionEvent) throws IOException {
+        WinChek documents = new WinChek();
     }
 }

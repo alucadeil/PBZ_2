@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public class Data {
 
-
     private String department;
     private String name;
     private String name_org;
@@ -17,6 +16,18 @@ public class Data {
     private LocalDate registration_date;
     private String type;
     private String executor;
+
+    public Data(int id_inner, String department, String name){
+        this.id_inner=id_inner;
+        this.department=department;
+        this.name=name;
+    }
+
+    public Data(int id_external, int code, String name_org){
+        this.id_external=id_external;
+        this.code = code;
+        this.name_org=name_org;
+    }
 
     public Data (int id, int number, LocalDate create_date, LocalDate registration_date, int code, String type, String name, String executor){
         this.id=id;
@@ -36,19 +47,6 @@ public class Data {
         this.telephone=telephone;
         this.email=email;
     }
-
-    public Data(int id_inner, String department, String name){
-        this.id_inner=id_inner;
-        this.department=department;
-        this.name=name;
-    }
-
-    public Data(int id_external, int code, String name_org){
-        this.id_external=id_external;
-        this.code = code;
-        this.name_org=name_org;
-    }
-
 
     public int getNumber() {
         return number;
@@ -161,6 +159,7 @@ public class Data {
     public void setId_inner(int id_inner) {
         this.id_inner = id_inner;
     }
+
 
     public int getId_external() {
         return id_external;

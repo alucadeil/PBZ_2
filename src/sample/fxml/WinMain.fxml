@@ -9,8 +9,7 @@
       <Button layoutX="158.0" layoutY="55.0" mnemonicParsing="false" onAction="#OpenRegistration" text="Регистрация" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
       <Button layoutX="130.0" layoutY="99.0" mnemonicParsing="false" onAction="#OpenCorrespondents" text="Корреспонденты" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
       <Button layoutX="130.0" layoutY="139.0" mnemonicParsing="false" onAction="#OpenPerformed" text="Исполнители" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-      <Button layoutX="130.0" layoutY="178.0" mnemonicParsing="false" onAction="#OpenAuthors" text="Авторы" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-      <Button layoutX="130.0" layoutY="221.0" mnemonicParsing="false" onAction="#OpenControllers" text="Контроллеры" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+      <Button layoutX="130.0" layoutY="221.0" mnemonicParsing="false" onAction="#OpenChek" text="Просмотр" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
       <Button layoutX="130.0" layoutY="264.0" mnemonicParsing="false" onAction="#OpenListDocuments" text="Список документов" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

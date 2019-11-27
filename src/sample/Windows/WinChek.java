@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class WinControllers {
-    public WinControllers() throws IOException {
+public class WinChek {
+    public WinChek() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/Controllers.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/Check.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
