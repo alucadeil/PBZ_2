@@ -28,13 +28,13 @@
                            </columns>
                         </TableView>
                         <ChoiceBox fx:id="position" layoutX="289.0" layoutY="239.0" prefWidth="150.0" />
-                        <TextField fx:id="email_author" layoutX="202.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="email" />
-                        <TextField fx:id="telephone_author" layoutX="14.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="Телефон" AnchorPane.leftAnchor="10.0" />
+                        <TextField fx:id="email" layoutX="202.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="email" />
+                        <TextField fx:id="telephone" layoutX="14.0" layoutY="313.0" prefHeight="26.0" prefWidth="162.0" promptText="Телефон" AnchorPane.leftAnchor="10.0" />
                         <Button layoutX="520.0" layoutY="313.0" mnemonicParsing="false" onAction="#save" text="Сохранить" />
                         <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#delete" text="Удалить" />
                         <Button layoutX="95.0" layoutY="240.0" mnemonicParsing="false" onAction="#search" text="Найти" />
-                        <TextField fx:id="name_author" layoutX="14.0" layoutY="276.0" prefHeight="26.0" prefWidth="246.0" promptText="ФИО" AnchorPane.leftAnchor="10.0" />
-                        <TextField fx:id="id_author" layoutX="14.0" layoutY="239.0" prefHeight="26.0" prefWidth="51.0" promptText="ID" AnchorPane.leftAnchor="10.0" />
+                        <TextField fx:id="name" layoutX="14.0" layoutY="276.0" prefHeight="26.0" prefWidth="246.0" promptText="ФИО" AnchorPane.leftAnchor="10.0" />
+                        <TextField fx:id="id" layoutX="14.0" layoutY="239.0" prefHeight="26.0" prefWidth="51.0" promptText="ID" AnchorPane.leftAnchor="10.0" />
                         <ChoiceBox fx:id="choice" layoutX="289.0" layoutY="276.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
