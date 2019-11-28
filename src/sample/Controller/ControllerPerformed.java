@@ -141,20 +141,21 @@ public class ControllerPerformed implements Initializable {
     }
 
     private PreparedStatement preparedStatementSearchController() throws SQLException{
-        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM executer WHERE id_executor=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM executor WHERE id_executor=?");
         preparedStatement.setInt(1, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
 
     public void search(ActionEvent actionEvent) {
         try(PreparedStatement preparedStatement = preparedStatementSearchController();) {
+            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 name.setText(rs.getString(2));
-                position.getItems().addAll(rs.getString(3));
+                position.setValue(rs.getString(3));
                 telephone.setText(rs.getString(4));
                 email.setText(rs.getString(5));
-                choice.getItems().addAll(rs.getString(6));
+                choice.setValue(rs.getString(6));
             }
         }catch (SQLException e) {
             e.printStackTrace();

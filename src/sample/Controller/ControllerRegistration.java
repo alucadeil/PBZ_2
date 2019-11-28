@@ -101,7 +101,6 @@ public class ControllerRegistration implements Initializable {
 
     public void save(ActionEvent actionEvent) {
         try(PreparedStatement preparedStatement = preparedStatementSave();){
-            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
