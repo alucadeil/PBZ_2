@@ -3,6 +3,7 @@ package sample.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -10,17 +11,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.DragEvent;
 import sample.Main;
 import sample.User;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 
-public class ControllerPerformed implements Initializable {
+public class ControllerEmployee implements Initializable {
     private Connection conn = Main.returnCon();
     @FXML
     private TableView<User> table;
@@ -29,9 +28,9 @@ public class ControllerPerformed implements Initializable {
     @FXML
     private TableColumn<User, Integer> col1;
     @FXML
-    private TextField id,name,telephone,email;
+    private TextField id,name,telephone,email,department;
     @FXML
-    private ChoiceBox position,choice;
+    private ChoiceBox position,role;
     private ObservableList<User> usersData = FXCollections.observableArrayList();
 
 
@@ -41,8 +40,8 @@ public class ControllerPerformed implements Initializable {
         position.getItems().clear();
         position.getItems().addAll(pos);
 
-        choice.getItems().clear();
-        choice.getItems().addAll(ch);
+        role.getItems().clear();
+        role.getItems().addAll(ch);
 
         table.getItems().clear();
         usersData.clear();
@@ -52,9 +51,9 @@ public class ControllerPerformed implements Initializable {
         col3.setCellValueFactory(new PropertyValueFactory<User, String>("position"));
         col4.setCellValueFactory(new PropertyValueFactory<User, String>("telephone"));
         col5.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
-        col6.setCellValueFactory(new PropertyValueFactory<User, String>("choice"));
+        col6.setCellValueFactory(new PropertyValueFactory<User, String>("role"));
 
-        try (PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM executor");
+        try (PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM employee");
              ResultSet rs = preparedStatement.executeQuery();) {
             while (rs.next()) {
                 usersData.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),
@@ -68,15 +67,14 @@ public class ControllerPerformed implements Initializable {
 
     }
     private PreparedStatement preparedStatementCountController() throws SQLException{
-        PreparedStatement preparedStatement = conn.prepareStatement("SELECT COUNT(id_executor) FROM executor WHERE id_executor=? " +
-                "and choice='controller'");
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT COUNT(id_employee) FROM employee WHERE id_employee=? ");
         preparedStatement.setInt(1, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
 
     private PreparedStatement preparedStatementUpdateController() throws SQLException{
-        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE executor SET name_controller=?,position=?,telephone=?," +
-                "email=?  WHERE id_executor=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE employee SET name=?,position=?,telephone=?," +
+                "email=?  WHERE id_employee=?");
         preparedStatement.setString(1, name.getText());
         preparedStatement.setString(2, position.getValue().toString());
         preparedStatement.setString(3, telephone.getText());
@@ -86,17 +84,18 @@ public class ControllerPerformed implements Initializable {
     }
 
     private PreparedStatement preparedStatementSaveController() throws SQLException{
-        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO executor(fio,position,telephone,email,choice) VALUES (?, ?,?,?,?)");
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO employee(name,position,telephone,email,role) VALUES (?, ?,?,?,?)",
+                Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, name.getText());
         preparedStatement.setString(2, position.getValue().toString());
         preparedStatement.setString(3, telephone.getText());
         preparedStatement.setString(4, email.getText());
-        preparedStatement.setString(5, choice.getValue().toString());
+        preparedStatement.setString(5, role.getValue().toString());
         return preparedStatement;
     }
 
     public void save(ActionEvent actionEvent) {
-        int count = 0;
+        int count = 0,id_inner=0;
         if (!id.getText().equals("")) {
             try(PreparedStatement preparedStatement = preparedStatementCountController();
                 ResultSet rs = preparedStatement.executeQuery();){
@@ -115,8 +114,19 @@ public class ControllerPerformed implements Initializable {
             }
         } else if (count == 0) {
             try(PreparedStatement preparedStatement = preparedStatementSaveController();){
-                System.out.println(preparedStatement);
                 preparedStatement.executeUpdate();
+                if(role.getValue().toString().equals("автор")) {
+                    ResultSet rs = preparedStatement.getGeneratedKeys();
+                    while (rs.next()) {
+                        id_inner = rs.getInt(1);
+                    }
+                    try(PreparedStatement preparedStatementInner = preparedStatementSaveInner(id_inner);){
+                        preparedStatementInner.executeUpdate();
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
             }catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -125,8 +135,15 @@ public class ControllerPerformed implements Initializable {
         id.clear();
     }
 
+    private PreparedStatement preparedStatementSaveInner(Integer id) throws SQLException {
+        PreparedStatement   preparedStatement = conn.prepareStatement("INSERT INTO inner_employee(id_employee,department) VALUES (?, ?)");
+        preparedStatement.setInt(1, id);
+        preparedStatement.setString(2, department.getText());
+        return preparedStatement;
+    }
+
     private PreparedStatement preparedStatementDeleteController() throws SQLException{
-        PreparedStatement   preparedStatement = conn.prepareStatement("DELETE FROM executor CASCADE WHERE id_exexutor=?");
+        PreparedStatement   preparedStatement = conn.prepareStatement("DELETE FROM employee CASCADE WHERE id_employee=?");
         preparedStatement.setInt(1, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
@@ -141,7 +158,7 @@ public class ControllerPerformed implements Initializable {
     }
 
     private PreparedStatement preparedStatementSearchController() throws SQLException{
-        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM executor WHERE id_executor=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM employee WHERE id_employee=?");
         preparedStatement.setInt(1, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
@@ -155,7 +172,7 @@ public class ControllerPerformed implements Initializable {
                 position.setValue(rs.getString(3));
                 telephone.setText(rs.getString(4));
                 email.setText(rs.getString(5));
-                choice.setValue(rs.getString(6));
+                role.setValue(rs.getString(6));
             }
         }catch (SQLException e) {
             e.printStackTrace();

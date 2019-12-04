@@ -19,17 +19,26 @@ public class User {
     private LocalDate registration_date;
     private String type;
     private String executor;
-    private String choice;
+    private String role;
     private String task;
     private LocalDate end_date;
+    private int id_task;
 
-    public User(int id, String name, String position, String telephone, String email, String choice) {
+    public int getId_task() {
+        return id_task;
+    }
+
+    public void setId_task(int id_task) {
+        this.id_task = id_task;
+    }
+
+    public User(int id, String name, String position, String telephone, String email, String role) {
         this.id = id;
         this.name = name;
         this.position = position;
         this.telephone = telephone;
         this.email = email;
-        this.choice = choice;
+        this.role = role;
     }
 
     public User(int id, int number, LocalDate create_date, LocalDate registration_date, int code, String type, String name, String executor,
@@ -78,6 +87,13 @@ public class User {
         this.end_date = end_date;
         this.id_executor = id_executor;
         this.name = name;
+    }
+
+    public User(int id_task, int id_executor, String name, int code) {
+        this.id_task = id_task;
+        this.id_executor = id_executor;
+        this.name = name;
+        this.code = code;
     }
 
     public int getId_executor() {
@@ -224,12 +240,12 @@ public class User {
         this.executor = executor;
     }
 
-    public String getChoice() {
-        return choice;
+    public String getRole() {
+        return role;
     }
 
-    public void setChoice(String choice) {
-        this.choice = choice;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public LocalDate getEnd_date() {

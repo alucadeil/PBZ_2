@@ -9,11 +9,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerPerformed">
+<AnchorPane prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerEmployee">
 <children>
       <TabPane prefHeight="400.0" prefWidth="634.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-            <Tab text="Авторы">
+            <Tab text="Сотрудники">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -35,7 +35,8 @@
                         <Button layoutX="95.0" layoutY="240.0" mnemonicParsing="false" onAction="#search" text="Найти" />
                         <TextField fx:id="name" layoutX="14.0" layoutY="276.0" prefHeight="26.0" prefWidth="246.0" promptText="ФИО" AnchorPane.leftAnchor="10.0" />
                         <TextField fx:id="id" layoutX="14.0" layoutY="239.0" prefHeight="26.0" prefWidth="51.0" promptText="ID" AnchorPane.leftAnchor="10.0" />
-                        <ChoiceBox fx:id="choice" layoutX="289.0" layoutY="276.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="role" layoutX="289.0" layoutY="276.0" prefWidth="150.0" />
+                        <TextField fx:id="department" layoutX="461.0" layoutY="275.0" prefHeight="26.0" prefWidth="162.0" promptText="Отдел" />
                      </children>
                   </AnchorPane>
                </content>

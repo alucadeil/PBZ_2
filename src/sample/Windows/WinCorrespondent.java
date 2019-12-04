@@ -10,7 +10,7 @@ import java.io.IOException;
 public class WinCorrespondent {
     public WinCorrespondent() throws IOException {
         Stage primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/Correspondents.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/Task.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

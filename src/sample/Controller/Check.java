@@ -56,7 +56,6 @@ public class Check implements Initializable {
    private PreparedStatement prepareStatementChek() throws SQLException {
        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
        LocalDate localDate = LocalDate.now();
-       System.out.println(localDate);
        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM document WHERE end_date=? and end_date<?");
        preparedStatement.setDate(1, Date.valueOf(end_date.getValue()));
        preparedStatement.setDate(2, Date.valueOf(localDate));
