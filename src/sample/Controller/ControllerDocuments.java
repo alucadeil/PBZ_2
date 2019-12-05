@@ -28,9 +28,7 @@ public class ControllerDocuments implements Initializable {
     private ChoiceBox executor;
     @FXML
     private DatePicker end_date;
-
     private ObservableList<User> usersData = FXCollections.observableArrayList();
-
 
     private void createTable(){
         usersData.clear();
@@ -39,7 +37,6 @@ public class ControllerDocuments implements Initializable {
         col2.setCellValueFactory(new PropertyValueFactory<User, String>("end_date"));
         col3.setCellValueFactory(new PropertyValueFactory<User, Integer>("id_executor"));
         col4.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
-
 
         try (PreparedStatement preparedStatementInner = conn.prepareStatement("SELECT * FROM document\n" +
                 "inner join executor e on document.id_executor = e.id_executor");
@@ -95,5 +92,4 @@ public class ControllerDocuments implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         createTable();
     }
-
 }

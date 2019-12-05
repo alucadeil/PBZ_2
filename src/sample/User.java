@@ -23,6 +23,66 @@ public class User {
     private String task;
     private LocalDate end_date;
     private int id_task;
+    private int id_document;
+    private  int id_author;
+    private String name_employee;
+
+    public String getName_employee() {
+        return name_employee;
+    }
+
+    public void setName_employee(String name_employee) {
+        this.name_employee = name_employee;
+    }
+
+    public int getId_document() {
+        return id_document;
+    }
+
+    public void setId_document(int id_document) {
+        this.id_document = id_document;
+    }
+
+    public int getId_author() {
+        return id_author;
+    }
+
+    public void setId_author(int id_author) {
+        this.id_author = id_author;
+    }
+
+    public int getId_controller() {
+        return id_controller;
+    }
+
+    public void setId_controller(int id_controller) {
+        this.id_controller = id_controller;
+    }
+
+    public String getId_tasks() {
+        return id_tasks;
+    }
+
+    public void setId_tasks(String id_tasks) {
+        this.id_tasks = id_tasks;
+    }
+
+    private int id_controller;
+    private String id_tasks;
+
+    public User(int id_document, int id_author, int id_controller, String id_tasks, LocalDate create_date, LocalDate registration_date,
+                LocalDate end_date, String name, String type) {
+        this.id_document=id_document;
+        this.id_author=id_author;
+        this.id_controller=id_controller;
+        this.id_tasks=id_tasks;
+        this.create_date=create_date;
+        this.registration_date=registration_date;
+        this.end_date=end_date;
+        this.name=name;
+        this.type=type;
+
+    }
 
     public int getId_task() {
         return id_task;
@@ -55,18 +115,18 @@ public class User {
         this.task = task;
     }
 
-    public User(int number, String name, String type, LocalDate end_date) {
-        this.number = number;
+    public User(int id_document, String name, String type, LocalDate end_date) {
+        this.id_document = id_document;
         this.name = name;
         this.type = type;
         this.end_date = end_date;
     }
 
-    public User(int number, String name, String task, String fio, String position) {
+    public User(int id_document, String name, String task, String name_employee, String position) {
+        this.id_document = id_document;
         this.name = name;
-        this.number = number;
         this.task = task;
-        this.fio = fio;
+        this.name_employee = name_employee;
         this.position = position;
     }
 

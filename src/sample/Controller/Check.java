@@ -36,7 +36,7 @@ public class Check implements Initializable {
     private void createTable(){
         usersData.clear();
         table.getItems().clear();
-        col1.setCellValueFactory(new PropertyValueFactory<User, Integer>("number"));
+        col1.setCellValueFactory(new PropertyValueFactory<User, Integer>("id_document"));
         col2.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         col3.setCellValueFactory(new PropertyValueFactory<User, String>("type"));
         col4.setCellValueFactory(new PropertyValueFactory<User, String>("end_date"));
@@ -44,8 +44,8 @@ public class Check implements Initializable {
         try (PreparedStatement preparedStatementInner = conn.prepareStatement("SELECT * FROM document");
              ResultSet rs = preparedStatementInner.executeQuery();) {
             while (rs.next()) {
-                usersData.add(new User(rs.getInt(2),rs.getString(7),
-                        rs.getString(6),rs.getDate(9).toLocalDate()));
+                usersData.add(new User(rs.getInt(1),rs.getString(8),
+                        rs.getString(9),rs.getDate(7).toLocalDate()));
             }
             table.setItems(usersData);
         } catch (SQLException e) {
@@ -53,7 +53,7 @@ public class Check implements Initializable {
         }
     }
 
-   private PreparedStatement prepareStatementChek() throws SQLException {
+   private PreparedStatement prepareStatementCheck() throws SQLException {
        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
        LocalDate localDate = LocalDate.now();
        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM document WHERE end_date=? and end_date<?");
@@ -62,9 +62,9 @@ public class Check implements Initializable {
        return preparedStatement;
    }
 
-    public void chek(ActionEvent actionEvent) {
+    public void check(ActionEvent actionEvent) {
         usersData.clear();
-        try (PreparedStatement preparedStatementInner = prepareStatementChek();
+        try (PreparedStatement preparedStatementInner = prepareStatementCheck();
              ResultSet rs = preparedStatementInner.executeQuery();) {
             while (rs.next()) {
                 usersData.add(new User(rs.getInt(2),rs.getString(7),
@@ -84,17 +84,19 @@ public class Check implements Initializable {
     public void checkDays(ActionEvent actionEvent) {
         usersData.clear();
         table2.getItems().clear();
-        col5.setCellValueFactory(new PropertyValueFactory<User, Integer>("number"));
+        col5.setCellValueFactory(new PropertyValueFactory<User, Integer>("id_document"));
         col6.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         col7.setCellValueFactory(new PropertyValueFactory<User, String>("task"));
-        col8.setCellValueFactory(new PropertyValueFactory<User, String>("fio"));
+        col8.setCellValueFactory(new PropertyValueFactory<User, String>("name_employee"));
         col9.setCellValueFactory(new PropertyValueFactory<User, String>("position"));
 
         try (PreparedStatement preparedStatement = preparedStatementCheckDate();
              ResultSet rs = preparedStatement.executeQuery();) {
             while (rs.next()) {
-                usersData.add(new User(rs.getInt(2),rs.getString(7),
-                        rs.getString(10),rs.getString(14),rs.getString(15)));
+                String name=getName(rs.getString(4),"name");
+                String position=getName(rs.getString(4),"position");
+                usersData.add(new User(rs.getInt(1),rs.getString(8),
+                        rs.getString(9),name,position));
             }
             table2.setItems(usersData);
         } catch (SQLException e) {
@@ -102,11 +104,40 @@ public class Check implements Initializable {
         }
     }
 
+
+    private String getName(String tasks,String txtForSearch) {
+        String id[]=tasks.split(",");
+        System.out.println(id.length);
+        tasks="";
+        for(int i=0;i<id.length;i++) {
+            try (PreparedStatement preparedStatement = preparedStatementTasks(id[i],txtForSearch);
+                 ResultSet rs = preparedStatement.executeQuery();) {
+                while (rs.next()) {
+                    tasks+=rs.getString(1)+",";
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return tasks;
+    }
+
+    private PreparedStatement preparedStatementTasks(String t,String txtForSearch) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        if(txtForSearch.equals("position")){
+            preparedStatement = conn.prepareStatement("SELECT position FROM employee WHERE id_employee=?");
+        }else if(txtForSearch.equals("name")){
+            preparedStatement = conn.prepareStatement("SELECT name FROM employee WHERE id_employee=?");
+        }
+        preparedStatement.setInt(1, Integer.parseInt(t));
+        System.out.println(preparedStatement);
+        return preparedStatement;
+    }
+
     private PreparedStatement preparedStatementCheckDate() throws SQLException {
         LocalDate d=date.getValue();
         d=d.plusDays(Integer.parseInt(days.getText()));
-        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM document\n" +
-                "inner join executor e on document.id_executor = e.id_executor WHERE end_date>?");
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM document WHERE end_date>?");
         preparedStatement.setDate(1, Date.valueOf(d));
         return preparedStatement;
     }

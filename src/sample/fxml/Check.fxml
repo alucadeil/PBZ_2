@@ -9,12 +9,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.Check">
    <children>
       <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="Документы">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -27,7 +26,7 @@
                           </columns>
                         </TableView>
                         <DatePicker fx:id="end_date" layoutX="7.0" layoutY="276.0" prefWidth="174.0" />
-                        <Button layoutX="248.0" layoutY="276.0" mnemonicParsing="false" onAction="#chek" text="Просмотр" />
+                        <Button layoutX="248.0" layoutY="276.0" mnemonicParsing="false" onAction="#check" text="Просмотр" />
                      </children>
                   </AnchorPane>
             </content>
