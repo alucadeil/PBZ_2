@@ -8,29 +8,33 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerRegistration">
-   <children>
-      <TableView fx:id="table" layoutX="64.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-        <columns>
-            <TableColumn fx:id="col1" prefWidth="52.0" text="id" />
-            <TableColumn fx:id="col2" prefWidth="60.800048828125" text="Автор" />
-            <TableColumn fx:id="col3" prefWidth="84.0" text="Контроллер" />
-            <TableColumn fx:id="col4" prefWidth="75.19999694824219" text="Задания" />
-            <TableColumn fx:id="col5" prefWidth="105.60003662109375" text="Дата создания" />
-            <TableColumn fx:id="col6" prefWidth="62.39996337890625" text="Дата рег" />
-            <TableColumn fx:id="col7" prefWidth="96.79998779296875" text="Срок" />
-            <TableColumn fx:id="col8" prefWidth="96.00006103515625" text="Имя" />
-            <TableColumn fx:id="col9" prefWidth="120.00006103515625" text="Тип" />
-        </columns>
-      </TableView>
-      <TextField fx:id="id_tasks" layoutX="20.0" layoutY="288.0" prefHeight="26.0" prefWidth="107.0" promptText="Задачи" />
-      <DatePicker fx:id="create_date" layoutX="133.0" layoutY="289.0" prefHeight="26.0" prefWidth="134.0" />
-      <DatePicker fx:id="registration_date" layoutX="133.0" layoutY="325.0" prefHeight="26.0" prefWidth="134.0" />
-      <ChoiceBox fx:id="author" layoutX="298.0" layoutY="325.0" prefWidth="150.0" />
-      <Button layoutX="477.0" layoutY="289.0" mnemonicParsing="false" onAction="#save" text="Сохранить" />
-      <ChoiceBox fx:id="type" layoutX="298.0" layoutY="289.0" prefWidth="150.0" />
-      <TextField fx:id="name" layoutX="20.0" layoutY="325.0" prefHeight="26.0" prefWidth="107.0" promptText="Название" />
-      <DatePicker fx:id="end_date" layoutX="133.0" layoutY="359.0" prefHeight="26.0" prefWidth="134.0" />
-      <ChoiceBox fx:id="controller" layoutX="298.0" layoutY="359.0" prefWidth="150.0" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerRegistration">
+    <children>
+        <TableView fx:id="table" layoutX="64.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0"
+                   AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <columns>
+                <TableColumn fx:id="col1" prefWidth="52.0" text="id"/>
+                <TableColumn fx:id="col2" prefWidth="60.800048828125" text="Автор"/>
+                <TableColumn fx:id="col3" prefWidth="84.0" text="Контроллер"/>
+                <TableColumn fx:id="col4" prefWidth="75.19999694824219" text="Задания"/>
+                <TableColumn fx:id="col5" prefWidth="105.60003662109375" text="Дата создания"/>
+                <TableColumn fx:id="col6" prefWidth="62.39996337890625" text="Дата рег"/>
+                <TableColumn fx:id="col7" prefWidth="96.79998779296875" text="Срок"/>
+                <TableColumn fx:id="col8" prefWidth="96.00006103515625" text="Имя"/>
+                <TableColumn fx:id="col9" prefWidth="120.00006103515625" text="Тип"/>
+            </columns>
+        </TableView>
+        <TextField fx:id="id_tasks" layoutX="20.0" layoutY="288.0" prefHeight="26.0" prefWidth="107.0"
+                   promptText="Задачи"/>
+        <DatePicker fx:id="create_date" layoutX="133.0" layoutY="289.0" prefHeight="26.0" prefWidth="134.0"/>
+        <DatePicker fx:id="registration_date" layoutX="133.0" layoutY="325.0" prefHeight="26.0" prefWidth="134.0"/>
+        <ChoiceBox fx:id="author" layoutX="298.0" layoutY="325.0" prefWidth="150.0"/>
+        <Button layoutX="477.0" layoutY="289.0" mnemonicParsing="false" onAction="#save" text="Сохранить"/>
+        <ChoiceBox fx:id="type" layoutX="298.0" layoutY="289.0" prefWidth="150.0"/>
+        <TextField fx:id="name" layoutX="20.0" layoutY="325.0" prefHeight="26.0" prefWidth="107.0"
+                   promptText="Название"/>
+        <DatePicker fx:id="end_date" layoutX="133.0" layoutY="359.0" prefHeight="26.0" prefWidth="134.0"/>
+        <ChoiceBox fx:id="controller" layoutX="298.0" layoutY="359.0" prefWidth="150.0"/>
+    </children>
 </AnchorPane>

@@ -24,19 +24,19 @@ public class ControllerEmployee implements Initializable {
     @FXML
     private TableView<User> table;
     @FXML
-    private TableColumn<User, String> col2, col3,col4, col5, col6;
+    private TableColumn<User, String> col2, col3, col4, col5, col6;
     @FXML
     private TableColumn<User, Integer> col1;
     @FXML
-    private TextField id,name,telephone,email,department;
+    private TextField id, name, telephone, email, department;
     @FXML
-    private ChoiceBox position,role;
+    private ChoiceBox position, role;
     private ObservableList<User> usersData = FXCollections.observableArrayList();
 
 
-    public void createTable(){
-        String[] pos={"директор","зам","начальник"};
-        String[] ch={"автор","контроллер","исполнитель"};
+    public void createTable() {
+        String[] pos = {"директор", "зам", "начальник"};
+        String[] ch = {"автор", "контроллер", "исполнитель"};
         position.getItems().clear();
         position.getItems().addAll(pos);
 
@@ -56,8 +56,8 @@ public class ControllerEmployee implements Initializable {
         try (PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM employee");
              ResultSet rs = preparedStatement.executeQuery();) {
             while (rs.next()) {
-                usersData.add(new User(rs.getInt(1),rs.getString(2),rs.getString(3),
-                        rs.getString(4),rs.getString(5),rs.getString(6)));
+                usersData.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6)));
             }
             table.setItems(usersData);
 
@@ -66,13 +66,14 @@ public class ControllerEmployee implements Initializable {
         }
 
     }
-    private PreparedStatement preparedStatementCountController() throws SQLException{
+
+    private PreparedStatement preparedStatementCountController() throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("SELECT COUNT(id_employee) FROM employee WHERE id_employee=? ");
         preparedStatement.setInt(1, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
 
-    private PreparedStatement preparedStatementUpdateController() throws SQLException{
+    private PreparedStatement preparedStatementUpdateController() throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("UPDATE employee SET name=?,position=?,telephone=?," +
                 "email=?  WHERE id_employee=?");
         preparedStatement.setString(1, name.getText());
@@ -83,7 +84,7 @@ public class ControllerEmployee implements Initializable {
         return preparedStatement;
     }
 
-    private PreparedStatement preparedStatementSaveController() throws SQLException{
+    private PreparedStatement preparedStatementSaveController() throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO employee(name,position,telephone,email,role) VALUES (?, ?,?,?,?)",
                 Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, name.getText());
@@ -95,39 +96,39 @@ public class ControllerEmployee implements Initializable {
     }
 
     public void save(ActionEvent actionEvent) {
-        int count = 0,id_inner=0;
+        int count = 0, id_inner = 0;
         if (!id.getText().equals("")) {
-            try(PreparedStatement preparedStatement = preparedStatementCountController();
-                ResultSet rs = preparedStatement.executeQuery();){
+            try (PreparedStatement preparedStatement = preparedStatementCountController();
+                 ResultSet rs = preparedStatement.executeQuery();) {
                 while (rs.next()) {
                     count = rs.getInt(1);
                 }
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         if (count == 1) {
-            try(PreparedStatement preparedStatement = preparedStatementUpdateController();){
+            try (PreparedStatement preparedStatement = preparedStatementUpdateController();) {
                 preparedStatement.executeUpdate();
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else if (count == 0) {
-            try(PreparedStatement preparedStatement = preparedStatementSaveController();){
+            try (PreparedStatement preparedStatement = preparedStatementSaveController();) {
                 preparedStatement.executeUpdate();
-                if(role.getValue().toString().equals("автор")) {
+                if (role.getValue().toString().equals("автор")) {
                     ResultSet rs = preparedStatement.getGeneratedKeys();
                     while (rs.next()) {
                         id_inner = rs.getInt(1);
                     }
-                    try(PreparedStatement preparedStatementInner = preparedStatementSaveInner(id_inner);){
+                    try (PreparedStatement preparedStatementInner = preparedStatementSaveInner(id_inner);) {
                         preparedStatementInner.executeUpdate();
-                    }catch (SQLException e) {
+                    } catch (SQLException e) {
                         e.printStackTrace();
                     }
 
                 }
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -136,35 +137,35 @@ public class ControllerEmployee implements Initializable {
     }
 
     private PreparedStatement preparedStatementSaveInner(Integer id) throws SQLException {
-        PreparedStatement   preparedStatement = conn.prepareStatement("INSERT INTO inner_employee(id_employee,department) VALUES (?, ?)");
+        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO inner_employee(id_employee,department) VALUES (?, ?)");
         preparedStatement.setInt(1, id);
         preparedStatement.setString(2, department.getText());
         return preparedStatement;
     }
 
-    private PreparedStatement preparedStatementDeleteController() throws SQLException{
-        PreparedStatement   preparedStatement = conn.prepareStatement("DELETE FROM employee CASCADE WHERE id_employee=?");
+    private PreparedStatement preparedStatementDeleteController() throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM employee CASCADE WHERE id_employee=?");
         preparedStatement.setInt(1, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
 
     public void delete(ActionEvent actionEvent) {
-        try(PreparedStatement preparedStatement = preparedStatementDeleteController();) {
+        try (PreparedStatement preparedStatement = preparedStatementDeleteController();) {
             preparedStatement.executeUpdate();
             createTable();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private PreparedStatement preparedStatementSearchController() throws SQLException{
+    private PreparedStatement preparedStatementSearchController() throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM employee WHERE id_employee=?");
         preparedStatement.setInt(1, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
 
     public void search(ActionEvent actionEvent) {
-        try(PreparedStatement preparedStatement = preparedStatementSearchController();) {
+        try (PreparedStatement preparedStatement = preparedStatementSearchController();) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -174,7 +175,7 @@ public class ControllerEmployee implements Initializable {
                 email.setText(rs.getString(5));
                 role.setValue(rs.getString(6));
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

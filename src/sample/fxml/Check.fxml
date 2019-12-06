@@ -9,49 +9,56 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.Check">
-   <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Документы">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="table" layoutX="40.0" layoutY="36.0" prefHeight="200.0" prefWidth="542.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                          <columns>
-                            <TableColumn fx:id="col1" prefWidth="146.4000244140625" text="Номер" />
-                            <TableColumn fx:id="col2" prefWidth="116.0" text="Название" />
-                              <TableColumn fx:id="col3" prefWidth="154.39996337890625" text="Тип" />
-                              <TableColumn fx:id="col4" prefWidth="163.20001220703125" text="Срок" />
-                          </columns>
-                        </TableView>
-                        <DatePicker fx:id="end_date" layoutX="7.0" layoutY="276.0" prefWidth="174.0" />
-                        <Button layoutX="248.0" layoutY="276.0" mnemonicParsing="false" onAction="#check" text="Просмотр" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Срок">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="table2" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                          <columns>
-                            <TableColumn fx:id="col5" prefWidth="93.60003662109375" text="Номер" />
-                            <TableColumn fx:id="col6" prefWidth="102.39996337890625" text="Название" />
-                              <TableColumn fx:id="col7" prefWidth="85.59991455078125" text="Задача" />
-                              <TableColumn fx:id="col8" prefWidth="158.39996337890625" text="ФИО" />
-                              <TableColumn fx:id="col9" prefWidth="141.60009765625" text="Должность" />
-                          </columns>
-                        </TableView>
-                        <DatePicker fx:id="date" layoutX="7.0" layoutY="278.0" />
-                        <TextField fx:id="days" layoutX="206.0" layoutY="278.0" promptText="Дни" />
-                        <Button layoutX="402.0" layoutY="278.0" mnemonicParsing="false" onAction="#checkDays" text="Просмотр" textFill="#c7118a" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.Check">
+    <children>
+        <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Документы">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="table" layoutX="40.0" layoutY="36.0" prefHeight="200.0"
+                                           prefWidth="542.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+                                           AnchorPane.topAnchor="10.0">
+                                    <columns>
+                                        <TableColumn fx:id="col1" prefWidth="146.4000244140625" text="Номер"/>
+                                        <TableColumn fx:id="col2" prefWidth="116.0" text="Название"/>
+                                        <TableColumn fx:id="col3" prefWidth="154.39996337890625" text="Тип"/>
+                                        <TableColumn fx:id="col4" prefWidth="163.20001220703125" text="Срок"/>
+                                    </columns>
+                                </TableView>
+                                <DatePicker fx:id="end_date" layoutX="7.0" layoutY="276.0" prefWidth="174.0"/>
+                                <Button layoutX="248.0" layoutY="276.0" mnemonicParsing="false" onAction="#check"
+                                        text="Просмотр"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Срок">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="table2" layoutX="14.0" layoutY="14.0" prefHeight="200.0"
+                                           prefWidth="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+                                           AnchorPane.topAnchor="10.0">
+                                    <columns>
+                                        <TableColumn fx:id="col5" prefWidth="93.60003662109375" text="Номер"/>
+                                        <TableColumn fx:id="col6" prefWidth="102.39996337890625" text="Название"/>
+                                        <TableColumn fx:id="col7" prefWidth="85.59991455078125" text="Задача"/>
+                                        <TableColumn fx:id="col8" prefWidth="158.39996337890625" text="ФИО"/>
+                                        <TableColumn fx:id="col9" prefWidth="141.60009765625" text="Должность"/>
+                                    </columns>
+                                </TableView>
+                                <DatePicker fx:id="date" layoutX="7.0" layoutY="278.0"/>
+                                <TextField fx:id="days" layoutX="244.0" layoutY="278.0" promptText="Дни"/>
+                                <Button layoutX="438.0" layoutY="278.0" mnemonicParsing="false" onAction="#checkDays"
+                                        text="Просмотр" textFill="#c7118a"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

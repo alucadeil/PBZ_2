@@ -19,69 +19,43 @@ public class ControllerDocuments implements Initializable {
     @FXML
     private TableView<User> table;
     @FXML
-    private TableColumn<User, String> col2, col4;
+    private TableColumn<User, String> col2, col3;
     @FXML
-    private TableColumn<User, Integer> col1, col3;
+    private TableColumn<User, Integer> col1;
     @FXML
-    private TextField id, id_executor;
-    @FXML
-    private ChoiceBox executor;
+    private TextField id;
     @FXML
     private DatePicker end_date;
     private ObservableList<User> usersData = FXCollections.observableArrayList();
 
-    private void createTable(){
+    private void createTable() {
         usersData.clear();
         table.getItems().clear();
-        col1.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
+        col1.setCellValueFactory(new PropertyValueFactory<User, Integer>("id_document"));
         col2.setCellValueFactory(new PropertyValueFactory<User, String>("end_date"));
-        col3.setCellValueFactory(new PropertyValueFactory<User, Integer>("id_executor"));
-        col4.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+        col3.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
 
-        try (PreparedStatement preparedStatementInner = conn.prepareStatement("SELECT * FROM document\n" +
-                "inner join executor e on document.id_executor = e.id_executor");
-             PreparedStatement preparedStatementExternal = conn.prepareStatement("SELECT * FROM executor");
-             ResultSet rs = preparedStatementInner.executeQuery();
-             ResultSet rsExecutor = preparedStatementExternal.executeQuery();) {
+        try (PreparedStatement preparedStatementInner = conn.prepareStatement("SELECT id_document,end_date,name FROM document");
+             ResultSet rs = preparedStatementInner.executeQuery();) {
             while (rs.next()) {
-                usersData.add(new User(rs.getInt(1),rs.getDate(9).toLocalDate(),rs.getInt(8),
-                        rs.getString(11)));
+                usersData.add(new User(rs.getInt(1), rs.getDate(2).toLocalDate(), rs.getString(3)));
             }
             table.setItems(usersData);
-
-            while (rsExecutor.next()) {
-                executor.getItems().addAll(rsExecutor.getString(2));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    private PreparedStatement preparedStatementID() throws SQLException {
-        PreparedStatement preparedStatement = conn.prepareStatement("SELECT id_executor FROM executor WHERE fio=?");
-        preparedStatement.setString(1, executor.getValue().toString());
-        return  preparedStatement;
-    }
 
     private PreparedStatement preparedStatementSave() throws SQLException {
-        int ID=0;
-        try(PreparedStatement preparedStatement = preparedStatementID();
-            ResultSet rs=preparedStatement.executeQuery();){
-            while (rs.next()){
-                ID=rs.getInt(1);
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE document SET end_date=?,id_executor=? WHERE id_document=?");
+        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE document SET end_date=? WHERE id_document=?");
         preparedStatement.setDate(1, Date.valueOf(end_date.getValue()));
-        preparedStatement.setInt(2, ID);
-        preparedStatement.setInt(3, Integer.parseInt(id.getText()));
+        preparedStatement.setInt(2, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
 
     public void save(ActionEvent actionEvent) {
         try (PreparedStatement preparedStatement = preparedStatementSave();) {
-                preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

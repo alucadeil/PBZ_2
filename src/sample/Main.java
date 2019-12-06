@@ -12,12 +12,13 @@ import java.sql.SQLException;
 
 public class Main extends Application {
     private static Connection conn;
+
     public static Connection returnCon() {
         return conn;
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/WinMain.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
@@ -42,3 +43,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+

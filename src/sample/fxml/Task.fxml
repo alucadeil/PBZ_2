@@ -9,34 +9,43 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerTask">
-   <children>
-      <TabPane prefHeight="400.0" prefWidth="516.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Задачи">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="table" layoutX="34.0" layoutY="32.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                          <columns>
-                              <TableColumn fx:id="col1" prefWidth="69.59997367858887" text="id" />
-                              <TableColumn fx:id="col2" minWidth="0.0" prefWidth="146.40003204345703" text="id исполнителя" />
-                              <TableColumn fx:id="col3" prefWidth="97.5999755859375" text="Название" />
-                              <TableColumn fx:id="col4" prefWidth="160.79998779296875" text="Код" />
-                          </columns>
-                        </TableView>
-                        <TextField fx:id="id" layoutX="20.0" layoutY="255.0" prefHeight="26.0" prefWidth="51.0" promptText="ID" />
-                        <TextField fx:id="name" layoutX="20.0" layoutY="329.0" prefHeight="26.0" prefWidth="322.0" promptText="Название" />
-                        <TextField fx:id="code" layoutX="210.0" layoutY="295.0" prefHeight="26.0" prefWidth="62.0" promptText="Код" />
-                        <Button layoutX="118.0" layoutY="256.0" mnemonicParsing="false" onAction="#SearchTask" text="Найти" />
-                        <Button layoutX="188.0" layoutY="256.0" mnemonicParsing="false" onAction="#deleteInner" text="Удалить" />
-                        <Button layoutX="427.0" layoutY="296.0" mnemonicParsing="false" onAction="#saveInner" text="Сохранить" />
-                        <ChoiceBox fx:id="executor" layoutX="20.0" layoutY="295.0" prefWidth="150.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ControllerTask">
+    <children>
+        <TabPane prefHeight="400.0" prefWidth="516.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Задачи">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="table" layoutX="34.0" layoutY="32.0" prefHeight="200.0"
+                                           prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                    <columns>
+                                        <TableColumn fx:id="col1" prefWidth="69.59997367858887" text="id"/>
+                                        <TableColumn fx:id="col2" minWidth="0.0" prefWidth="146.40003204345703"
+                                                     text="id исполнителя"/>
+                                        <TableColumn fx:id="col3" prefWidth="97.5999755859375" text="Название"/>
+                                        <TableColumn fx:id="col4" prefWidth="160.79998779296875" text="Код"/>
+                                    </columns>
+                                </TableView>
+                                <TextField fx:id="id" layoutX="20.0" layoutY="255.0" prefHeight="26.0" prefWidth="51.0"
+                                           promptText="ID"/>
+                                <TextField fx:id="name" layoutX="20.0" layoutY="329.0" prefHeight="26.0"
+                                           prefWidth="322.0" promptText="Название"/>
+                                <TextField fx:id="code" layoutX="210.0" layoutY="295.0" prefHeight="26.0"
+                                           prefWidth="62.0" promptText="Код"/>
+                                <Button layoutX="118.0" layoutY="256.0" mnemonicParsing="false" onAction="#SearchTask"
+                                        text="Найти"/>
+                                <Button layoutX="188.0" layoutY="256.0" mnemonicParsing="false" onAction="#deleteInner"
+                                        text="Удалить"/>
+                                <Button layoutX="427.0" layoutY="296.0" mnemonicParsing="false" onAction="#saveInner"
+                                        text="Сохранить"/>
+                                <ChoiceBox fx:id="executor" layoutX="20.0" layoutY="295.0" prefWidth="150.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

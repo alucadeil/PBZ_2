@@ -100,10 +100,12 @@ public class ControllerTask implements Initializable {
     }
 
     private PreparedStatement preparedStatementUpdate() throws SQLException{
-        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE task SET code=?,name=? WHERE id_task=?");
+        int ID=preparedStatementIdExecutorSearch();
+        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE task SET code=?,name=?,id_executor=? WHERE id_task=?");
         preparedStatement.setInt(1, Integer.parseInt(code.getText()));
         preparedStatement.setString(2, name.getText());
-        preparedStatement.setInt(3, Integer.parseInt(id.getText()));
+        preparedStatement.setInt(3, ID);
+        preparedStatement.setInt(4, Integer.parseInt(id.getText()));
         return preparedStatement;
     }
 
@@ -113,6 +115,20 @@ public class ControllerTask implements Initializable {
         preparedStatement.setString(2,name.getText());
         preparedStatement.setInt(3, Integer.parseInt(code.getText()));
         return preparedStatement;
+    }
+
+
+    private int preparedStatementIdExecutorSearch() {
+        int idExecutor=0;
+        try (PreparedStatement preparedStatement = preparedStatementIdExecutor();
+             ResultSet rs = preparedStatement.executeQuery();) {
+            while (rs.next()) {
+                idExecutor = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idExecutor;
     }
 
     private PreparedStatement preparedStatementIdExecutor() throws SQLException {
@@ -144,14 +160,7 @@ public class ControllerTask implements Initializable {
                 e.printStackTrace();
             }
         } else if (count == 0) {
-            try (PreparedStatement preparedStatement = preparedStatementIdExecutor();
-                 ResultSet rs = preparedStatement.executeQuery();) {
-                while (rs.next()) {
-                    idExecutor = rs.getInt(1);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            idExecutor=preparedStatementIdExecutorSearch();
             try (PreparedStatement preparedStatement = preparedStatementSave(idExecutor);) {
                 System.out.println(preparedStatement);
                 preparedStatement.executeUpdate();
