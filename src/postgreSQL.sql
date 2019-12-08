@@ -1,39 +1,39 @@
-
-CREATE TABLE inner_guys(
-    id_inner BIGSERIAL,
+CREATE TABLE inner_employee(
+    id_employee BIGSERIAL,
     department VARCHAR(20),
+    FOREIGN KEY (id_employee) REFERENCES employee(id_employee) ON delete set null
+);
+
+
+CREATE TABLE task(
+    id_task BIGSERIAL,
+    id_executor INT,
     name VARCHAR(20),
-    PRIMARY KEY (id_inner)
+    code INT,
+    PRIMARY KEY (id_task)
 );
 
-CREATE TABLE external_guys(
-    id_external BIGSERIAL,
-    code BIGSERIAL,
-    name_org VARCHAR(20),
-    PRIMARY KEY (id_external)
-);
-
-CREATE TABLE executor(
-    id_executor BIGSERIAL,
-    fio VARCHAR(40),
+CREATE TABLE employee(
+    id_employee BIGSERIAL,
+    name VARCHAR(40),
     position VARCHAR(20),
     telephone VARCHAR(20),
     email VARCHAR(40),
-    choice VARCHAR(20),
-    PRIMARY KEY (id_executor)
+    role VARCHAR(20),
+    PRIMARY KEY (id_employee)
 );
 
 CREATE TABLE document(
     id_document BIGSERIAL,
-    number INT,
+    id_author INT,
+    id_controller INT,
+    id_task VARCHAR(20),
     create_date DATE,
     registration_date DATE,
-    code INT,
-    type VARCHAR(20),
-    name VARCHAR(40),
-    id_executor INT,
     end_date DATE,
-    task VARCHAR(40),
+    name VARCHAR(40),
+    type VARCHAR(20),
     PRIMARY KEY (id_document),
-    FOREIGN KEY (id_executor) REFERENCES executor(id_executor)  ON delete  set null
+    FOREIGN KEY (id_author) REFERENCES employee(id_employee) ON delete set null,
+    FOREIGN KEY (id_controller) REFERENCES employee(id_employee) ON delete set null
 );

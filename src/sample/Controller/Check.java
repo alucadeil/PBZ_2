@@ -67,8 +67,8 @@ public class Check implements Initializable {
         try (PreparedStatement preparedStatementInner = prepareStatementCheck();
              ResultSet rs = preparedStatementInner.executeQuery();) {
             while (rs.next()) {
-                usersData.add(new User(rs.getInt(2), rs.getString(7),
-                        rs.getString(6), rs.getDate(9).toLocalDate()));
+                usersData.add(new User(rs.getInt(1), rs.getString(8),
+                        rs.getString(9), rs.getDate(7).toLocalDate()));
             }
             table.setItems(usersData);
         } catch (SQLException e) {
