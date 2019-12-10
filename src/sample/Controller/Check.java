@@ -44,8 +44,8 @@ public class Check implements Initializable {
         try (PreparedStatement preparedStatementInner = conn.prepareStatement("SELECT * FROM document");
              ResultSet rs = preparedStatementInner.executeQuery();) {
             while (rs.next()) {
-                usersData.add(new User(rs.getInt(1), rs.getString(8),
-                        rs.getString(9), rs.getDate(7).toLocalDate()));
+                usersData.add(new User(rs.getInt(1), rs.getString(7),
+                        rs.getString(8), rs.getDate(6).toLocalDate()));
             }
             table.setItems(usersData);
         } catch (SQLException e) {
@@ -93,10 +93,8 @@ public class Check implements Initializable {
         try (PreparedStatement preparedStatement = preparedStatementCheckDate();
              ResultSet rs = preparedStatement.executeQuery();) {
             while (rs.next()) {
-                String name = getName(rs.getString(4), "name");
-                String position = getName(rs.getString(4), "position");
-                usersData.add(new User(rs.getInt(1), rs.getString(8),
-                        rs.getString(9), name, position));
+                usersData.add(new User(rs.getInt(1), rs.getString(7),searchTableTask(rs.getInt(1),1),
+                        searchTableTask(rs.getInt(1),2), searchTableTask(rs.getInt(1),3)));
             }
             table2.setItems(usersData);
         } catch (SQLException e) {
@@ -104,22 +102,32 @@ public class Check implements Initializable {
         }
     }
 
-
-    private String getName(String tasks, String txtForSearch) {
-        String id[] = tasks.split(",");
-        System.out.println(id.length);
-        tasks = "";
-        for (int i = 0; i < id.length; i++) {
-            try (PreparedStatement preparedStatement = preparedStatementTasks(id[i], txtForSearch);
-                 ResultSet rs = preparedStatement.executeQuery();) {
-                while (rs.next()) {
-                    tasks += rs.getString(1) + ",";
+    private String searchTableTask(int id,int i) {
+        String txt="";
+        boolean bool=false;
+        try (PreparedStatement preparedStatement = preparedStatementSearchTask(id);
+             ResultSet rs = preparedStatement.executeQuery();) {
+            while (rs.next()) {
+                if (bool==false) {
+                    txt += rs.getString(i);
+                    bool=true;
+                }else{
+                    txt +=","+rs.getString(i);
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return tasks;
+        return txt;
+    }
+
+    private PreparedStatement preparedStatementSearchTask(int id) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT t.id_task,e.name,position FROM doc_task inner join task t on doc_task.id_task = t.id_task\n" +
+                "inner join employee e on t.id_executor = e.id_employee WHERE id_document=?");
+        preparedStatement.setInt(1,id);
+        System.out.println(preparedStatement);
+        return preparedStatement;
     }
 
     private PreparedStatement preparedStatementTasks(String t, String txtForSearch) throws SQLException {
