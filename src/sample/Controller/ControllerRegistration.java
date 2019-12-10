@@ -7,10 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import sample.Main;
 import sample.User;
 
-import javafx.scene.text.Text;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;

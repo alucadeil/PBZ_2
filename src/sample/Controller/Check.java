@@ -42,7 +42,7 @@ public class Check implements Initializable {
         col4.setCellValueFactory(new PropertyValueFactory<User, String>("end_date"));
 
         try (PreparedStatement preparedStatementInner = conn.prepareStatement("SELECT * FROM document");
-             ResultSet rs = preparedStatementInner.executeQuery();) {
+             ResultSet rs = preparedStatementInner.executeQuery()) {
             while (rs.next()) {
                 usersData.add(new User(rs.getInt(1), rs.getString(7),
                         rs.getString(8), rs.getDate(6).toLocalDate()));
@@ -65,7 +65,7 @@ public class Check implements Initializable {
     public void check(ActionEvent actionEvent) {
         usersData.clear();
         try (PreparedStatement preparedStatementInner = prepareStatementCheck();
-             ResultSet rs = preparedStatementInner.executeQuery();) {
+             ResultSet rs = preparedStatementInner.executeQuery()) {
             while (rs.next()) {
                 usersData.add(new User(rs.getInt(1), rs.getString(8),
                         rs.getString(9), rs.getDate(7).toLocalDate()));
@@ -91,10 +91,10 @@ public class Check implements Initializable {
         col9.setCellValueFactory(new PropertyValueFactory<User, String>("position"));
 
         try (PreparedStatement preparedStatement = preparedStatementCheckDate();
-             ResultSet rs = preparedStatement.executeQuery();) {
+             ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
-                usersData.add(new User(rs.getInt(1), rs.getString(7),searchTableTask(rs.getInt(1),1),
-                        searchTableTask(rs.getInt(1),2), searchTableTask(rs.getInt(1),3)));
+                usersData.add(new User(rs.getInt(1), rs.getString(7), searchTableTask(rs.getInt(1), 1),
+                        searchTableTask(rs.getInt(1), 2), searchTableTask(rs.getInt(1), 3)));
             }
             table2.setItems(usersData);
         } catch (SQLException e) {
@@ -102,17 +102,17 @@ public class Check implements Initializable {
         }
     }
 
-    private String searchTableTask(int id,int i) {
-        String txt="";
-        boolean bool=false;
+    private String searchTableTask(int id, int i) {
+        String txt = "";
+        boolean bool = false;
         try (PreparedStatement preparedStatement = preparedStatementSearchTask(id);
-             ResultSet rs = preparedStatement.executeQuery();) {
+             ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
-                if (bool==false) {
+                if (bool == false) {
                     txt += rs.getString(i);
-                    bool=true;
-                }else{
-                    txt +=","+rs.getString(i);
+                    bool = true;
+                } else {
+                    txt += "," + rs.getString(i);
                 }
             }
 
@@ -125,7 +125,7 @@ public class Check implements Initializable {
     private PreparedStatement preparedStatementSearchTask(int id) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement("SELECT t.id_task,e.name,position FROM doc_task inner join task t on doc_task.id_task = t.id_task\n" +
                 "inner join employee e on t.id_executor = e.id_employee WHERE id_document=?");
-        preparedStatement.setInt(1,id);
+        preparedStatement.setInt(1, id);
         System.out.println(preparedStatement);
         return preparedStatement;
     }
